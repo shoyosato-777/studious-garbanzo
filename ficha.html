@@ -1,0 +1,134 @@
+ficha.html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Sobrevivente</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+         body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background: #111;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        header {
+            text-align: center;
+        }
+        h1, h2 {
+            color: #ccc;
+        }
+        .status, .atributos, .pericias, .detalhes-pessoais {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #222;
+            border-radius: 5px;
+        }
+        .barra {
+            background: #333;
+            padding: 5px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        .vida { background-color: rgb(10, 172, 50); }
+        .sanidade { background-color: blue; }
+        .habilidade { background-color: rgb(150, 147, 7); }
+        .editavel {
+            cursor: pointer;
+            border-bottom: 1px dashed #ffffff;
+        }
+        .editavel {
+            cursor: pointer;
+            border-bottom: 1px dashed #fff;
+        }
+        .botao-sair {
+            background: red;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="titulo">Ficha de <span id="playerDisplay"></span></h1>
+            <button class="botao-sair" onclick="sair()">Sair</button>
+        </header>
+        <main>
+            <section class="detalhes-pessoais">
+                <h2>Detalhes Pessoais</h2>
+                <p><strong>Personagem:</strong> <span contenteditable="true" class="editavel" id="nome">digite um nome</span></p>
+                <p><strong>Jogador:</strong> <span id="jogador"></span></p>
+                <p><strong>Sexo:</strong> <span contenteditable="true" class="editavel" id="sexo">???</span></p>
+                <p><strong>Idade:</strong> <span contenteditable="true" class="editavel" id="idade">00</span></p>
+            </section>
+           <section class="status">
+                <h2>Status</h2>
+                <div class="barra vida">Vida: <span contenteditable="true" id="vida" class="editavel">?? / ??</span></div>
+                <div class="barra sanidade">Sanidade:<span contenteditable="true" id="sanidade" class="editavel">?? / ??</span></div>
+                <div class="barra habilidade">Pontos de Hab.: <span contenteditable="true" id="habilidade" class="editavel">?? / ??</span></div>
+            </section>
+            
+            <section class="atributos">
+                <h2>Atributos</h2>
+                <p>Força: <span contenteditable="true" class="editavel" id="força">0</span></p>
+                <p>Resistência: <span contenteditable="true" class="editavel" id="resistencia">0</span></p>
+                <p>Velocidade: <span contenteditable="true" class="editavel" id="velocidade">0</span></p>
+                <p>Sorte: <span contenteditable="true" class="editavel" id="sorte">0</span></p>
+                <p>Carisma: <span contenteditable="true" class="editavel" id="carisma">0</span></p>
+            </section>
+            
+            <section class="inventário">
+                <h2>Inventário</h2>
+                <p contenteditable="true" class="editavel" id="inventario">Vazio</p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function carregarFicha() {
+            let playerName = localStorage.getItem("currentPlayer");
+            if (!playerName) {
+                window.location.href = "index.html";
+                return;
+            }
+            document.getElementById("playerDisplay").innerText = playerName;
+            document.getElementById("jogador").innerText = playerName;
+
+            document.querySelectorAll(".editavel").forEach(element => {
+                const id = playerName + "_" + element.id;
+                if (localStorage.getItem(id)) {
+                    element.innerText = localStorage.getItem(id);
+                }
+                element.addEventListener("input", () => {
+                    localStorage.setItem(id, element.innerText);
+                });
+            });
+        }
+
+        function sair() {
+            localStorage.removeItem("currentPlayer");
+            window.location.href = "index.html";
+        }
+
+        document.addEventListener("DOMContentLoaded", carregarFicha);
+    </script>
+</body>
+</html>
+
