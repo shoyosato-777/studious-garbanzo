@@ -1,0 +1,70 @@
+mesas.html
+<<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesa de RPG</title>
+    <link rel="stylesheet" href="mesas.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #2c1705, #d36600);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            background: #000000;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            width: 60%;
+        }
+        button {
+            background: #e98503;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+        }
+        button:hover {
+            background: #974705;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mesa de RPG</h1>
+            <input type="text" id="codigoMesa" placeholder="Digite o código da mesa">
+            <button onclick="entrarMesa()">Entrar</button>
+        </header>
+    </div>
+
+    <script>
+        function entrarMesa() {
+            const codigo = document.getElementById("codigoMesa").value;
+            const mesas = JSON.parse(localStorage.getItem("mesas")) || {}; // Recupera mesas salvas
+
+            if (mesas[codigo]) {
+                window.location.href = "mesa.html?codigo=" + codigo; // Redireciona para a página da mesa
+            } else {
+                alert("Código inválido! Tente novamente.");
+            }
+        }
+    </script>
+</body>
+</html>

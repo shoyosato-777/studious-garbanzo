@@ -1,0 +1,25 @@
+criar_mesa.html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criação de Mesa - RPG</title>
+    <link rel="stylesheet" href="criar_mesa.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Criar uma Nova Mesa de RPG</h1>
+        <label for="nomeMesa">Nome da Mesa:</label>
+        <input type="text" id="nomeMesa" placeholder="Digite um nome para a mesa">
+        
+        <label for="codigoMesa">Código de Acesso:</label>
+        <input type="text" id="codigoMesa" placeholder="Defina um código ou senha">
+        
+        <button onclick="criarMesa()">Criar Mesa</button>
+        
+        <div id="mensagem"></div>
+    </div>
+    <script src="criar_mesa.js"></script>
+</body>
+</html>
