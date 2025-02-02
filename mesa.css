@@ -1,0 +1,112 @@
+mesa.css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #380808, #0a0601);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    background: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    color:rgb(255, 255, 255)
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #444;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.fichas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.ficha {
+    background: #333;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+.ficha img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.ficha-info {
+    flex-grow: 1;
+}
+
+.ficha-info h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.status-bar {
+    height: 8px;
+    width: 100px;
+    background: #555;
+    border-radius: 4px;
+    position: relative;
+}
+
+.status-bar span {
+    position: absolute;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.vida {
+    background: #5ab157;
+}
+
+.sanidade {
+    background: #3498db;
+}
+
+.botao-sair {
+    background: rgb(223, 100, 0);
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.botao-sair:hover {
+    background: rgb(160, 65, 2);
+}

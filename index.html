@@ -5,6 +5,8 @@ index.html
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
     <link rel="stylesheet" href="style.css">
     <style>
         body {
@@ -22,7 +24,7 @@ index.html
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
             text-align: center;
-            margin-left: -69px
+            margin-left: -70px
         }
         input {
             padding: 10px;
@@ -39,7 +41,28 @@ index.html
         <input type="text" id="playerName" placeholder="Digite seu nome">
         <button onclick="entrar()">Entrar</button>
     </div>
+    <div id="g_id_onload"
+     data-client_id="869939819717-jli0t7sf6jjddje12922p9kq8b368p3s.apps.googleusercontent.com"
+     data-context="signin"
+     data-ux_mode="popup"
+     data-login_uri="https://fichadesobrevivente.netlify.app/"
+     data-auto_prompt="false">
+</div>
 
+<div class="g_id_signin"
+     data-type="standard"
+     data-shape="pill"
+     data-theme="filled_black"
+     data-text="continue_with"
+     data-size="large"
+     data-logo_alignment="left">
+</div>
+<script>
+    function handleCredentialResponse ( response ) {
+        const data = jwt_decode (response.credential)
+        console.log(data)
+    }
+</script>
     <script>
         function entrar() {
             let playerName = document.getElementById("playerName").value.trim();
