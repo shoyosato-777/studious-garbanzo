@@ -16,10 +16,10 @@ body {
 }
 
 .login-container {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(48, 1, 1, 0.8);
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 10px rgba(36, 36, 36, 0.3);
     text-align: center;
     width: 300px;
 }
@@ -52,6 +52,7 @@ button {
 }
 
 button:hover {
-    background: #e65c00;
+    background: #000000;
+    color: #ff6600;
     transform: scale(1.05);
 }

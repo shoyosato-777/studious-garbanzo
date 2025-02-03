@@ -101,6 +101,27 @@ ficha.html
     background: #044b08;
     transform: scale(1.05);
 }
+.botao-sair {
+    position: fixed; /* Fixa o botão na tela */
+    bottom: 10px; /* Distância do fundo */
+    left: 10px; /* Distância da esquerda */
+    background: rgb(0, 0, 0); /* Cor do botão */
+    color: rgb(218, 105, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.botao-sair:hover {
+    background: rgb(218, 105, 0);
+    color: #000;
+    transform: scale(1.05);
+}
+
     </style>
     <style>
         body {
@@ -119,6 +140,7 @@ ficha.html
         }
     </style>
 </head>
+<button class="botao-sair" onclick="sair()">Sair</button>
 <body>
 
     <nav class="header">
@@ -193,6 +215,10 @@ ficha.html
         }
 
         document.addEventListener("DOMContentLoaded", carregarFichas);
+        
+        function sair() {
+    window.location.href = "index.html"; 
+}
     </script>
 
 </body>
