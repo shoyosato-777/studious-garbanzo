@@ -4,7 +4,7 @@ ficha.html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha de Sobrevivente</title>
+    <title>Fichas de RPG</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -15,12 +15,12 @@ ficha.html
             flex-direction: column;
             align-items: center;
             margin: 0;
-            padding-top: 60px; /* Para evitar sobreposição com o cabeçalho fixo */
+            padding-top: 60px;
         }
 
         .header {
             width: 100%;
-            background: #000000;
+            background: linear-gradient(135deg, #1a0f06, #490404);
             padding: 15px 0;
             position: fixed;
             top: 0;
@@ -42,36 +42,42 @@ ficha.html
         }
 
         .header a:hover, .header a.active {
-            background: rgb(235, 113, 0);
-            color: #000;
+            background: rgb(0, 0, 0);
+            color: #e26600;
         }
 
         .container {
-            width: 80%;
-            max-width: 800px;
-            background: #111;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            width: 90%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        header {
+        .ficha {
+            background: #000000;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(41, 41, 41, 0.2);
+            width: 300px;
             text-align: center;
         }
 
-        h1, h2 {
+        h2 {
             color: #ccc;
+            margin-bottom: 10px;
         }
 
-        .status, .atributos, .pericias, .detalhes-pessoais {
-            margin-bottom: 20px;
-            padding: 10px;
-            background: #222;
-            border-radius: 5px;
+        .editavel {
+            cursor: pointer;
+            border-bottom: 1px dashed #fff;
+            display: inline-block;
+            min-width: 50px;
         }
 
         .barra {
-            background: #333;
+            background: #222;
             padding: 5px;
             border-radius: 5px;
             margin: 5px 0;
@@ -81,101 +87,112 @@ ficha.html
         .sanidade { background-color: blue; }
         .habilidade { background-color: rgb(150, 147, 7); }
 
-        .editavel {
-            cursor: pointer;
-            border-bottom: 1px dashed #fff;
-        }
-
-        .botao-sair {
-            background: rgb(255, 255, 255);
-            color: rgb(0, 0, 0);
+        .botao {
+            background: rgb(5, 37, 4);
+            color: #ffffff;
             padding: 10px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
             margin-top: 10px;
+            font-weight: bold;
+        }
+        button:hover {
+    background: #044b08;
+    transform: scale(1.05);
+}
+    </style>
+    <style>
+        body {
+            background-image: url('imagen/map.jpg'); /* Caminho da imagem */
+            background-size: cover; /* Faz a imagem cobrir toda a tela */
+            background-position: center; /* Centraliza a imagem */
+            background-attachment: fixed; /* Mantém a imagem fixa ao rolar */
+            background-repeat: no-repeat; /* Evita repetição */
+        }
+    </style>
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('imagen/map.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
     </style>
 </head>
 <body>
 
     <nav class="header">
-        <a href="fichas.html" class="active">Fichas</a>
-        <a href="mesa.html">Mesa</a>
+        <a href="ficha.html" class="active">Fichas</a>
     </nav>
 
-    <div class="container">
-        <header>
-            <h1 id="titulo">Ficha de <span id="playerDisplay"></span></h1>
-            <button class="botao-sair" onclick="sair()">Sair</button>
-        </header>
-        <main>
-            <section class="detalhes-pessoais">
-                <h2>Detalhes Pessoais</h2>
-                <p><strong>Personagem:</strong> <span contenteditable="true" class="editavel" id="nome">digite um nome</span></p>
-                <p><strong>Jogador:</strong> <span id="jogador"></span></p>
-                <p><strong>Sexo:</strong> <span contenteditable="true" class="editavel" id="sexo">???</span></p>
-                <p><strong>Idade:</strong> <span contenteditable="true" class="editavel" id="idade">00</span></p>
-            </section>
+    <button class="botao" onclick="novaFicha()">Criar Nova Ficha</button>
 
-            <section class="status">
-                <h2>Status</h2>
-                <div class="barra vida">Vida: <span contenteditable="true" id="vida" class="editavel">?? / ??</span></div>
-                <div class="barra sanidade">Sanidade:<span contenteditable="true" id="sanidade" class="editavel">?? / ??</span></div>
-                <div class="barra habilidade">Pontos de Hab.: <span contenteditable="true" id="habilidade" class="editavel">?? / ??</span></div>
-            </section>
-            
-            <section class="atributos">
-                <h2>Atributos</h2>
-                <p>Força: <span contenteditable="true" class="editavel" id="força">0</span></p>
-                <p>Resistência: <span contenteditable="true" class="editavel" id="resistencia">0</span></p>
-                <p>Velocidade: <span contenteditable="true" class="editavel" id="velocidade">0</span></p>
-                <p>Sorte: <span contenteditable="true" class="editavel" id="sorte">0</span></p>
-                <p>Carisma: <span contenteditable="true" class="editavel" id="carisma">0</span></p>
-            </section>
-
-            <section class="inventário">
-                <h2>Inventário</h2>
-                <p contenteditable="true" class="editavel" id="inventario">Vazio</p>
-            </section>
-        </main>
+    <div class="container" id="fichasContainer">
+        <!-- Fichas serão inseridas aqui via JavaScript -->
     </div>
 
     <script>
-        function carregarFicha() {
-            let playerName = localStorage.getItem("currentPlayer");
-            if (!playerName) {
-                window.location.href = "index.html";
-                return;
-            }
-            document.getElementById("playerDisplay").innerText = playerName;
-            document.getElementById("jogador").innerText = playerName;
+        function carregarFichas() {
+            let fichas = JSON.parse(localStorage.getItem("fichas")) || [];
+
+            let container = document.getElementById("fichasContainer");
+            container.innerHTML = ""; // Limpa antes de recriar
+
+            fichas.forEach((ficha, index) => {
+                let fichaDiv = document.createElement("div");
+                fichaDiv.classList.add("ficha");
+
+                fichaDiv.innerHTML = `
+                    <h2 contenteditable="true" class="editavel" data-index="${index}" data-key="nome">${ficha.nome || "Novo Personagem"}</h2>
+                    <p><strong>Idade:</strong> <span contenteditable="true" class="editavel" data-index="${index}" data-key="idade">${ficha.idade || "??"}</span></p>
+                    <p><strong>Gênero:</strong> <span contenteditable="true" class="editavel" data-index="${index}" data-key="genero">${ficha.genero || "???"}</span></p>
+                    <div class="barra vida">Vida: <span contenteditable="true" class="editavel" data-index="${index}" data-key="vida">${ficha.vida || "?? / ??"}</span></div>
+                    <div class="barra sanidade">Sanidade: <span contenteditable="true" class="editavel" data-index="${index}" data-key="sanidade">${ficha.sanidade || "?? / ??"}</span></div>
+                    <div class="barra habilidade">Pontos de Hab.: <span contenteditable="true" class="editavel" data-index="${index}" data-key="habilidade">${ficha.habilidade || "?? / ??"}</span></div>
+                    <section class="inventário">
+    <h2><strong>Inventário:</strong></h2>
+    <p contenteditable="true" class="editavel" id="inventario">Vazio</p>
+</section>
+<section class="armas">
+    <h2><strong>Armas:</strong></h2>
+    <p contenteditable="true" class="editavel" id="armas">Não possui arma</p>
+</section>
+
+                    <button class="botao" onclick="removerFicha(${index})">Remover</button>
+                `;
+
+                container.appendChild(fichaDiv);
+            });
 
             document.querySelectorAll(".editavel").forEach(element => {
-                const id = playerName + "_" + element.id;
-                if (localStorage.getItem(id)) {
-                    element.innerText = localStorage.getItem(id);
-                }
-                element.addEventListener("input", () => {
-                    localStorage.setItem(id, element.innerText);
-                });
-            });
-
-            // Marcar a aba ativa no menu
-            let links = document.querySelectorAll(".header a");
-            links.forEach(link => {
-                if (window.location.href.includes(link.getAttribute("href"))) {
-                    link.classList.add("active");
-                }
+                element.addEventListener("input", atualizarFicha);
             });
         }
 
-        function sair() {
-            localStorage.removeItem("currentPlayer");
-            window.location.href = "index.html";
+        function novaFicha() {
+            let fichas = JSON.parse(localStorage.getItem("fichas")) || [];
+            fichas.push({ nome: "Novo Personagem", idade: "??", genero: "???", vida: "?? / ??", sanidade: "?? / ??", habilidade: "?? / ??", inventario: "Vazio" });
+            localStorage.setItem("fichas", JSON.stringify(fichas));
+            carregarFichas();
         }
 
-        document.addEventListener("DOMContentLoaded", carregarFicha);
+        function atualizarFicha(event) {
+            let index = event.target.getAttribute("data-index");
+            let key = event.target.getAttribute("data-key");
+
+            let fichas = JSON.parse(localStorage.getItem("fichas")) || [];
+            fichas[index][key] = event.target.innerText;
+            localStorage.setItem("fichas", JSON.stringify(fichas));
+        }
+
+        function removerFicha(index) {
+            let fichas = JSON.parse(localStorage.getItem("fichas")) || [];
+            fichas.splice(index, 1);
+            localStorage.setItem("fichas", JSON.stringify(fichas));
+            carregarFichas();
+        }
+
+        document.addEventListener("DOMContentLoaded", carregarFichas);
     </script>
 
 </body>
