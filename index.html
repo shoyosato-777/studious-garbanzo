@@ -1,0 +1,68 @@
+index.html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 6px;
+            margin-left: 0px
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+    </div>
+    <div id="g_id_onload"
+     data-client_id="869939819717-jli0t7sf6jjddje12922p9kq8b368p3s.apps.googleusercontent.com"
+     data-context="signin"
+     data-ux_mode="popup"
+     data-login_uri="https://fichasdesobreviventes.netlify.app/ficha.html"
+     data-auto_prompt="false">
+</div>
+
+<div class="g_id_signin"
+     data-type="standard"
+     data-shape="pill"
+     data-theme="filled_black"
+     data-text="continue_with"
+     data-size="large"
+     data-logo_alignment="left">
+</div>
+<script>
+    function handleCredentialResponse ( response ) {
+        const data = jwt_decode (response.credential)
+        console.log(data)
+    }
+</script>
+    <script>
+        function entrar() {
+            let playerName = document.getElementById("playerName").value.trim();
+            if (playerName === "") {
+                alert("Digite um nome válido!");
+                return;
+            }
+            localStorage.setItem("currentPlayer", playerName);
+            window.location.href = "ficha.html";
+        }
+    </script>
+</body>
+</html>
