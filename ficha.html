@@ -85,7 +85,7 @@ ficha.html
 
         .vida { background-color: rgb(10, 172, 50); }
         .sanidade { background-color: blue; }
-        .habilidade { background-color: rgb(150, 147, 7); }
+        .habilidade { background-color: rgb(212, 2, 2); }
 
         .botao {
             background: rgb(5, 37, 4);
@@ -190,7 +190,15 @@ ficha.html
                 element.addEventListener("input", atualizarFicha);
             });
         }
-
+        const firebaseConfig = {
+  apiKey: "AIzaSyARVpsSYhHV4ciH4vdz2jZNxwuwccpgf6g",
+  authDomain: "projeto-ficha-27fca.firebaseapp.com",
+  databaseURL: "https://projeto-ficha-27fca-default-rtdb.firebaseio.com",
+  projectId: "projeto-ficha-27fca",
+  storageBucket: "projeto-ficha-27fca.firebasestorage.app",
+  messagingSenderId: "369809119434",
+  appId: "1:369809119434:web:9cf306824ae5edb45d7c33"
+};
         function novaFicha() {
             let fichas = JSON.parse(localStorage.getItem("fichas")) || [];
             fichas.push({ nome: "Novo Personagem", idade: "??", genero: "???", vida: "?? / ??", sanidade: "?? / ??", habilidade: "?? / ??", inventario: "Vazio" });
@@ -220,6 +228,5 @@ ficha.html
     window.location.href = "index.html"; 
 }
     </script>
-
 </body>
 </html>

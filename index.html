@@ -61,6 +61,17 @@ index.html
         console.log(data)
     }
 </script>
+<script>
+    const firebaseConfig = {
+  apiKey: "AIzaSyARVpsSYhHV4ciH4vdz2jZNxwuwccpgf6g",
+  authDomain: "projeto-ficha-27fca.firebaseapp.com",
+  databaseURL: "https://projeto-ficha-27fca-default-rtdb.firebaseio.com",
+  projectId: "projeto-ficha-27fca",
+  storageBucket: "projeto-ficha-27fca.firebasestorage.app",
+  messagingSenderId: "369809119434",
+  appId: "1:369809119434:web:9cf306824ae5edb45d7c33"
+};
+</script>
     <script>
         function entrar() {
             let playerName = document.getElementById("playerName").value.trim();
@@ -68,7 +79,6 @@ index.html
                 alert("Digite um nome válido!");
                 return;
             }
-            localStorage.setItem("currentPlayer", playerName);
             window.location.href = "ficha.html";
         }
     </script>
