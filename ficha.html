@@ -152,7 +152,49 @@ ficha.html
     <div class="container" id="fichasContainer">
         <!-- Fichas serão inseridas aqui via JavaScript -->
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script>
+      // Conectar ao Supabase
+      const supabaseUrl = "https://vklkfzzclbvecdqvutgk.supabase.co";
+      const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrbGtmenpjbGJ2ZWNkcXZ1dGdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4ODE5ODEsImV4cCI6MjA1NDQ1Nzk4MX0.bCjR_3c1rawU6tMqEKm672DntsGBwA6gdDflgVzZiag";
+      const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    
+      async function buscarFichas() {
+          let { data, error } = await supabase.from("fichas").select("*");
+          if (error) {
+              console.error("Erro ao buscar fichas:", error);
+          } else {
+              console.log("Fichas:", data);
+          }
+      }
+    
+      buscarFichas();
+      async function inserirFicha(nome, idade, genero, vida, sanidade, pontos, inventario, armas) {
+    const { data, error } = await supabase
+        .from("ficha") // Nome da tabela
+        .insert([
+            {
+                nome: nome,
+                idade: idade,
+                genero: genero,
+                vida: vida,
+                sanidade: sanidade,
+                pontos: pontos,
+                inventario: inventario, // Pode ser um JSON ou String
+                armas: armas // Pode ser um JSON ou String
+            }
+        ]);
 
+    if (error) {
+        console.error("Erro ao inserir ficha:", error);
+    } else {
+        console.log("Ficha inserida com sucesso:", data);
+    }
+}
+inserirFicha("Herói", 25, "Masculino", 100, 80, 10, "Espada, Poção", "Espada Longa");
+
+    </script>
+    
     <script>
         function carregarFichas() {
             let fichas = JSON.parse(localStorage.getItem("fichas")) || [];
@@ -190,20 +232,11 @@ ficha.html
                 element.addEventListener("input", atualizarFicha);
             });
         }
-        const firebaseConfig = {
-  apiKey: "AIzaSyARVpsSYhHV4ciH4vdz2jZNxwuwccpgf6g",
-  authDomain: "projeto-ficha-27fca.firebaseapp.com",
-  databaseURL: "https://projeto-ficha-27fca-default-rtdb.firebaseio.com",
-  projectId: "projeto-ficha-27fca",
-  storageBucket: "projeto-ficha-27fca.firebasestorage.app",
-  messagingSenderId: "369809119434",
-  appId: "1:369809119434:web:9cf306824ae5edb45d7c33"
-};
+
         function novaFicha() {
             let fichas = JSON.parse(localStorage.getItem("fichas")) || [];
             fichas.push({ nome: "Novo Personagem", idade: "??", genero: "???", vida: "?? / ??", sanidade: "?? / ??", habilidade: "?? / ??", inventario: "Vazio" });
             localStorage.setItem("fichas", JSON.stringify(fichas));
-            carregarFichas();
         }
 
         function atualizarFicha(event) {

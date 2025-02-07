@@ -1,0 +1,156 @@
+cadastro.html
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>cadastro</title>
+    <meta charset="utf-8">
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(rgb(151, 48, 48), rgb(48, 30, 18));
+        }
+        .box{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: rgb(0, 0, 0);
+          padding: 15px;
+          border-radius: 15px;
+          width: 20%;
+          color:rgb(223, 96, 11)
+        }
+        fieldset{
+          border: 3px solid rgb(255, 255, 255);
+        }
+        legend{
+          border: 1px solid rgb(223, 96, 11);
+          padding: 10px;
+          text-align: center;
+          background-color: rgb(223, 96, 11);
+          border-radius: 8px;
+          color: rgb(0, 0, 0);
+        }
+        .inputBox {
+          position: relative;
+        }
+        .inputUser{
+          background: none;
+          border: none;
+          border-bottom: 1px solid white;
+          outline: none;
+          color: white;
+          font-size: 14px;
+          width: 100%;
+          letter-spacing: 2px;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        .labelInput{
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          pointer-events: none;
+          transition: 3s;
+        }
+        .inputUser:focus ~ .labelInput, .inputUser:valid ~ .labelInput{
+          top: -50%;
+          font-size: 10px;
+          color: rgb(184, 28, 8);
+        }
+        #submit{
+          background-image: linear-gradient(rgb(211, 102, 13), black);
+          width: 100%;
+          border: none;
+          padding: 15px;
+          color: white;
+          font-size: 14px;
+          cursor: pointer;
+          border-radius: 10px;
+        }
+        #submit:hover{
+          background-image: linear-gradient(black, rgb(211, 102, 13));
+        }
+    </style>
+    <style>
+      body {
+          background-image: url('https://i.pinimg.com/736x/e5/41/22/e54122d3656bc1fb8afd5e2254cf5fac.jpg');
+          background-size: cover; /* Faz a imagem cobrir toda a tela */
+          background-position: center; /* Centraliza a imagem */
+          background-attachment: fixed; /* Mantém a imagem fixa ao rolar */
+          background-repeat: no-repeat; /* Evita repetição */
+      }
+  </style>
+  <style>
+      body {
+          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                      url('https://i.pinimg.com/736x/e5/41/22/e54122d3656bc1fb8afd5e2254cf5fac.jpg');
+          background-size: cover;
+      }
+  </style>
+  </head>
+  <body>
+    <div class="box">
+     <form id="cadastroForm">
+        <fieldset>
+            <legend><b>Cadastre-se!</b></legend>
+            <br><br>
+            <div class="inputBox">
+                <input type="text" name="Nome" id="nome" class="inputUser" required>
+                <label for="nome" class="labelInput">Nome de Usuário</label>
+            </div>
+            <br><br>
+            <div class="inputBox">
+                <input type="password" name="senha" id="senha" class="inputUser" required>
+                <label for="senha" class="labelInput">Senha</label>
+            </div>
+            <br><br>
+            <div class="inputBox">
+                <input type="email" name="email" id="email" class="inputUser" required>
+                <label for="email" class="labelInput">Email</label>
+            </div>
+            <br><br>
+            <input type="submit" name="submit" id="submit" value="Cadastrar">
+        </fieldset>
+     </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+      // Conectar ao Supabase
+      const supabaseUrl = "https://vklkfzzclbvecdqvutgk.supabase.co";
+      const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrbGtmenpjbGJ2ZWNkcXZ1dGdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4ODE5ODEsImV4cCI6MjA1NDQ1Nzk4MX0.bCjR_3c1rawU6tMqEKm672DntsGBwA6gdDflgVzZiag";
+      const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+      document.getElementById("cadastroForm").addEventListener("submit", async (event) => 
+       event.preventDefault());
+
+       let nome = document.getElementById("nome").value;
+        let email = document.getElementById("email").value;
+        let senha = document.getElementById("senha").value;
+      
+        try {
+          // Criar usuário no Supabase Auth
+          let { data, error } = await supabase.auth.signUp({ email, password: senha });
+
+          if (error) throw error;
+
+          console.log("Usuário criado:", data);
+
+          // Salvar usuário no banco de dados
+          const { error: dbError } = await supabase.from("usuarios").insert([
+            { id: data.user.id, email: email, nome: nome }
+          ]);
+
+          if (dbError) throw dbError;
+
+          alert("Cadastro realizado com sucesso!");
+          window.location.href = "index.html"; // Redireciona para o login
+
+        } catch (error) {
+          console.error("Erro ao cadastrar:", error.message);
+          alert("Erro ao cadastrar: " + error.message);
+        };
+
+    </script>
+  </body>
+</html>
