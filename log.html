@@ -1,0 +1,91 @@
+index.html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #2b0404;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            margin-left: -70px
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 6px;
+            margin-left: 0px
+        }
+        .botao-voltar{
+            position: fixed;
+            left: 50%;
+            padding: 12;
+            font-size: 12px
+
+        }
+    </style>
+    <style>
+        body {
+            background-image: url('https://i.pinimg.com/originals/da/52/d7/da52d799286f405106715d96bf1cf418.jpg'); /* Caminho da imagem */
+            background-size: cover; /* Faz a imagem cobrir toda a tela */
+            background-position: center; /* Centraliza a imagem */
+            background-attachment: fixed; /* Mantém a imagem fixa ao rolar */
+            background-repeat: no-repeat; /* Evita repetição */
+        }
+    </style>
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://i.pinimg.com/originals/da/52/d7/da52d799286f405106715d96bf1cf418.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <input type="text" id="playerName" placeholder="Digite seu nome">
+        <input type="password" id="senha" placeholder="Senha">
+        <button onclick="entrar()">Entrar</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    // Conectar ao Supabase
+    const supabaseUrl = "https://vklkfzzclbvecdqvutgk.supabase.co";
+      const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrbGtmenpjbGJ2ZWNkcXZ1dGdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4ODE5ODEsImV4cCI6MjA1NDQ1Nzk4MX0.bCjR_3c1rawU6tMqEKm672DntsGBwA6gdDflgVzZiag";
+      const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    function handleCredentialResponse ( response ) {
+        const data = jwt_decode (response.credential)
+        console.log(data)
+    }
+</script>
+    <script>
+        function entrar() {
+            let playerName = document.getElementById("playerName").value.trim();
+            if (playerName === "") {
+                alert("Digite um nome válido!");
+                return;
+            }
+            localStorage.setItem("currentPlayer", playerName);
+            window.location.href = "ficha.html";
+        }
+    </script>
+</body>
+</html>
