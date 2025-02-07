@@ -17,11 +17,13 @@ cadastro.html
           background-color: rgb(0, 0, 0);
           padding: 30px;
           border-radius: 15px;
-          width: 30%;
+          width: 45%;
+          height: 35%;
           color:rgb(223, 96, 11)
         }
         fieldset{
           border: 3px solid rgb(255, 255, 255);
+          height: 95%;
         }
         legend{
           border: 1px solid rgb(223, 96, 11);
@@ -30,6 +32,7 @@ cadastro.html
           background-color: rgb(223, 96, 11);
           border-radius: 8px;
           color: rgb(0, 0, 0);
+          font-size: 22px;
         }
         .inputBox {
           position: relative;
@@ -40,7 +43,7 @@ cadastro.html
           border-bottom: 1px solid white;
           outline: none;
           color: white;
-          font-size: 14px;
+          font-size: 16px;
           width: 100%;
           letter-spacing: 2px;
           font-family: Arial, Helvetica, sans-serif;
@@ -50,11 +53,12 @@ cadastro.html
           top: 0px;
           left: 0px;
           pointer-events: none;
+          font-size: 17px;
           transition: 3s;
         }
         .inputUser:focus ~ .labelInput, .inputUser:valid ~ .labelInput{
           top: -50%;
-          font-size: 10px;
+          font-size: 12px;
           color: rgb(184, 28, 8);
         }
         #submit{
@@ -63,7 +67,7 @@ cadastro.html
           border: none;
           padding: 15px;
           color: white;
-          font-size: 14px;
+          font-size: 16px;
           cursor: pointer;
           border-radius: 10px;
         }
@@ -92,22 +96,29 @@ cadastro.html
     <div class="box">
      <form id="cadastroForm">
         <fieldset>
-            <legend><b>Cadastre-se!</b></legend>
+            <legend><b>Cadastre-se</b></legend>
+            <br><br>
             <br><br>
             <div class="inputBox">
                 <input type="text" name="Nome" id="nome" class="inputUser" required>
                 <label for="nome" class="labelInput">Nome de Usuário</label>
             </div>
             <br><br>
+            <br><br>
+            <br><br>
             <div class="inputBox">
                 <input type="password" name="senha" id="senha" class="inputUser" required>
                 <label for="senha" class="labelInput">Senha</label>
             </div>
             <br><br>
+            <br><br>
+            <br><br>
             <div class="inputBox">
                 <input type="email" name="email" id="email" class="inputUser" required>
                 <label for="email" class="labelInput">Email</label>
             </div>
+            <br><br>
+            <br><br>
             <br><br>
             <input type="submit" name="submit" id="submit" value="Cadastrar">
         </fieldset>
